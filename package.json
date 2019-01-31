@@ -1,0 +1,32 @@
+{
+  "name": "console-logfmt",
+  "version": "1.0.0",
+  "description": "console.log/warn/error interface for logfmt",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gumieri/console-logfmt.git"
+  },
+  "keywords": [
+    "logfmt",
+    "log",
+    "console",
+    "node",
+    "nodejs"
+  ],
+  "author": "Rafael Gumieri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gumieri/console-logfmt/issues"
+  },
+  "homepage": "https://github.com/gumieri/console-logfmt#readme",
+  "dependencies": {
+    "logfmt": "^1.2.1"
+  },
+  "devDependencies": {
+    "ava": "^1.2.0"
+  }
+}
