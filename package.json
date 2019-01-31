@@ -4,7 +4,8 @@
   "description": "console.log/warn/error interface for logfmt",
   "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "watch": "ava --watch"
   },
   "repository": {
     "type": "git",

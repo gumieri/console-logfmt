@@ -1,22 +1,36 @@
 const logfmt = require('logfmt')
 
-function log (msg, data) {
-  if (!data) data = msg
-  data = Object.assign({ level: 'info', msg }, data)
+function log (...params) {
+  const data = params.reduce(
+    (data, param) => {
+      if (typeof param === 'string') {
+        if (data.msg) {
+          data.msg += ` ${param}`
+        } else {
+          data.msg = param
+        }
+      }
+
+      if (typeof param === 'object' && param !== null) {
+        data = Object.assign(data, param)
+      }
+
+      return data
+    },
+    { level: 'info' }
+  )
 
   const string = logfmt.stringify(data)
-
-  console.log(string)
 
   return string
 }
 
-function warn (msg, data) {
-  return log(Object.assign({ level: 'warn', msg }, data))
+function warn (params) {
+  return log(params, { level: 'warn' })
 }
 
-function error (msg, data) {
-  return log(Object.assign({ level: 'error', msg }, data))
+function error (params) {
+  return log(params, { level: 'error' })
 }
 
 module.exports = { log, warn, error }

@@ -15,22 +15,25 @@ The level is defined as:
 - `warn()` ⇒ `'warn'`
 - `error()` ⇒ `'error'`
 
-The first parameter will be the string for the `msg=`:
+Any string parameter will be concatenated to the `msg=` key:
 ```javascript
 const { log, warn, error } = require('console-logfmt')
 
 log('message')
 // output:
 // level=info msg=message
+
+log('message', 'of something')
+// output:
+// level=info msg="message of something"
 ```
-The last parameter so breaks the interface to be an object giving the usage as logfmt needs:
+Any object parameter wil be passed to the logfmt as it is:
 ```javascript
 warn('message of warning', { extra: 'data' })
 // output
 // level=warn msg="message of warning" extra=data
 ```
 
-If no first parameter is informed, its ok:
 ```javascript
 error({ other: 'message of error', extra: 'data' })
 // output
