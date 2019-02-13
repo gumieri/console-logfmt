@@ -41,6 +41,9 @@ error({ other: 'message of error', extra: 'data' })
 // level=error other="message of error" extra=data
 ```
 
+## Important to notice
+
+The default output for any log level is the `process.stderr`, if you need something different, the [console parameters](https://nodejs.org/api/console.html#console_new_console_stdout_stderr_ignoreerrors) still valid to be informed/replaced.
 
 ## License
 
