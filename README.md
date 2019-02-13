@@ -17,7 +17,8 @@ The level is defined as:
 
 Any string parameter will be concatenated to the `msg=` key:
 ```javascript
-const { log, warn, error } = require('console-logfmt')
+const ConsoleLogFmt = require('console-logfmt')
+const { log, warn, error } = new ConsoleLogFmt()
 
 log('message')
 // output:

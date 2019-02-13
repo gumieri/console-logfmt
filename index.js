@@ -1,6 +1,7 @@
 const logfmt = require('logfmt')
+const { Console } = require('console')
 
-function log (...params) {
+function format (params) {
   const data = params.reduce(
     (data, param) => {
       if (typeof param === 'string') {
@@ -20,17 +21,37 @@ function log (...params) {
     { level: 'info' }
   )
 
-  const string = logfmt.stringify(data)
-
-  return string
+  return logfmt.stringify(data)
 }
 
-function warn (params) {
-  return log(params, { level: 'warn' })
+function ConsoleLogFmt (options) {
+  const original = new Console(
+    Object.assign({ stdout: process.stderr, stderr: process.stderr }, options)
+  )
+
+  return {
+    log: (...params) => {
+      const string = format(params)
+
+      original.log(string)
+
+      return string
+    },
+    warn: (...params) => {
+      const string = format([...params, { level: 'warn' }])
+
+      original.warn(string)
+
+      return string
+    },
+    error: (...params) => {
+      const string = format([...params, { level: 'error' }])
+
+      original.error(string)
+
+      return string
+    }
+  }
 }
 
-function error (params) {
-  return log(params, { level: 'error' })
-}
-
-module.exports = { log, warn, error }
+module.exports = ConsoleLogFmt
