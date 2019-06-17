@@ -1,6 +1,6 @@
 {
   "name": "console-logfmt",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "console.log/warn/error interface for logfmt",
   "main": "index.js",
   "scripts": {
