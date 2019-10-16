@@ -1,6 +1,27 @@
 const logfmt = require('logfmt')
 const { Console } = require('console')
 
+function plainfy ({ object = {}, parentKeys = [] }) {
+  let plainObject = {}
+
+  Object.keys(object).forEach(key => {
+    if (typeof object[key] !== 'object') {
+      if (parentKeys.length > 0) {
+        plainObject[`${parentKeys.join('_')}_${key}`] = object[key]
+        return
+      }
+
+      plainObject[key] = object[key]
+      return
+    }
+
+    parentKeys.push(key)
+    plainObject = plainfy({ parentKeys, object: object[key] })
+  })
+
+  return plainObject
+}
+
 function format (params) {
   const data = params.reduce(
     (data, param) => {
@@ -13,7 +34,7 @@ function format (params) {
       }
 
       if (typeof param === 'object' && param !== null) {
-        data = Object.assign(data, param)
+        data = Object.assign(data, plainfy({ object: param }))
       }
 
       return data
